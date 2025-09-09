@@ -26,3 +26,75 @@ title: Comments
 </div>
 
 <script async defer src="https://cusdis.com/js/cusdis.es.js"></script>
+
+<script>
+// Wait for Cusdis to load, then inject CSS to remove mini scrollbar and add dark mode
+function styleCusdis() {
+    // Try to find the Cusdis iframe
+    const iframe = document.querySelector('iframe[src*="cusdis"]');
+    if (iframe) {
+        try {
+            // Access iframe content
+            const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+            
+            // Inject CSS to remove scrollbar and add dark mode
+            const style = iframeDoc.createElement('style');
+            style.textContent = `
+                * {
+                    max-height: none !important;
+                    height: auto !important;
+                    overflow: visible !important;
+                    overflow-y: visible !important;
+                    overflow-x: visible !important;
+                }
+                body, html {
+                    max-height: none !important;
+                    height: auto !important;
+                    overflow: visible !important;
+                    background-color: #0a0a0a !important;
+                    color: #ffffff !important;
+                }
+                /* Dark mode styling for all Cusdis elements */
+                .cusdis-comment,
+                .cusdis-comment-content,
+                .cusdis-comment-body,
+                .cusdis-comment-header,
+                .cusdis-comment-author,
+                .cusdis-comment-time,
+                .cusdis-comment-text,
+                .cusdis-comment-form,
+                .cusdis-comment-input,
+                .cusdis-comment-textarea,
+                .cusdis-comment-button {
+                    background-color: #1a1a1a !important;
+                    color: #ffffff !important;
+                    border-color: #333333 !important;
+                }
+                input, textarea, button {
+                    background-color: #2a2a2a !important;
+                    color: #ffffff !important;
+                    border-color: #333333 !important;
+                }
+            `;
+            iframeDoc.head.appendChild(style);
+        } catch (e) {
+            console.log('Cannot access iframe content (cross-origin)');
+        }
+    }
+    
+    // Also try to style the iframe itself
+    if (iframe) {
+        iframe.style.height = 'auto';
+        iframe.style.maxHeight = 'none';
+        iframe.style.overflow = 'visible';
+    }
+}
+
+// Try multiple times to catch the iframe when it loads
+setTimeout(styleCusdis, 1000);
+setTimeout(styleCusdis, 3000);
+setTimeout(styleCusdis, 5000);
+
+// Also try when the page loads
+document.addEventListener('DOMContentLoaded', styleCusdis);
+</script>
