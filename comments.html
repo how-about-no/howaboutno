@@ -54,29 +54,35 @@ const observer = new MutationObserver((mutations) => {
                 node.srcdoc = node.srcdoc.replace('</head>', extraCss + '</head>');
             }
             // Also relax and enlarge iframe element constraints
+            // Get height of .mt-4.px-1 and add to minHeight
+            const getListHeight = () => {
+                try {
+                    const d = node.contentDocument || node.contentWindow.document;
+                    if (!d) return 0;
+                    const list = d.querySelector('.mt-4.px-1');
+                    if (!list) return 0;
+                    return list.offsetHeight || list.scrollHeight || 0;
+                } catch (_) {
+                    return 0;
+                }
+            };
+
+            const listHeight = getListHeight();
             node.style.height = 'auto';
             node.style.maxHeight = 'none';
-            node.style.minHeight = '600px';
+            node.style.minHeight = (600 + listHeight) + 'px';
             node.style.width = '100%';
             node.style.overflow = 'visible';
             node.setAttribute('scrolling', 'no');
 
             // Try to auto-resize to content when accessible
             const tryResize = () => {
-                try {
-                    const d = node.contentDocument || node.contentWindow.document;
-                    if (!d) return;
-                    const h = Math.max(
-                        d.body ? d.body.scrollHeight : 0,
-                        d.documentElement ? d.documentElement.scrollHeight : 0
-                    );
-                    if (h && h > 0) {
-                        node.style.height = h + 'px';
-                    }
-                } catch (_) {
-                    // Cross-origin; ignore
+                const newListHeight = getListHeight();
+                if (newListHeight > 0) {
+                    node.style.minHeight = (370 + newListHeight) + 'px';
                 }
             };
+            
             tryResize();
             setTimeout(tryResize, 1200);
             setTimeout(tryResize, 3000);
@@ -88,3 +94,4 @@ const observer = new MutationObserver((mutations) => {
 });
 observer.observe(document.getElementById('cusdis_thread'), { childList: true, subtree: true });
 </script>
+
