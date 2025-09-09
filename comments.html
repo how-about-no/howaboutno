@@ -14,75 +14,22 @@ title: Comments
         <p>I'd love to hear from you! Whether you want to discuss a blog post, share your own thoughts, or just want to say hello, this is the place to do it. Don't be shy - I promise I don't bite! 😊</p>
     </div>
 
-    <div class="cusdis-container">
-        <div id="cusdis_thread" 
-             data-host="https://cusdis.com" 
-             data-app-id="f774ef06-871e-4aea-91d6-12d6e4e0c4f8" 
-             data-page-id="comments" 
-             data-page-url="{{ site.url }}{{ site.baseurl }}/comments/" 
-             data-page-title="Comments & Feedback">
-        </div>
+    <div id="cusdis_thread" 
+         data-host="https://cusdis.com" 
+         data-app-id="f774ef06-871e-4aea-91d6-12d6e4e0c4f8" 
+         data-page-id="comments" 
+         data-page-url="{{ site.url }}{{ site.baseurl }}/comments/" 
+         data-page-title="Comments & Feedback"
+         data-theme="dark">
     </div>
 </div>
 
 <script async defer src="https://cusdis.com/js/cusdis.es.js"></script>
 
 <script>
-// Wait for Cusdis to load, then inject CSS to remove mini scrollbar and add dark mode
-function styleCusdis() {
-    // Try to find the Cusdis iframe
+// Simple script to remove height restrictions
+function removeCusdisScrollbar() {
     const iframe = document.querySelector('iframe[src*="cusdis"]');
-    if (iframe) {
-        try {
-            // Access iframe content
-            const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
-            
-            // Inject CSS to remove scrollbar and add dark mode
-            const style = iframeDoc.createElement('style');
-            style.textContent = `
-                * {
-                    max-height: none !important;
-                    height: auto !important;
-                    overflow: visible !important;
-                    overflow-y: visible !important;
-                    overflow-x: visible !important;
-                }
-                body, html {
-                    max-height: none !important;
-                    height: auto !important;
-                    overflow: visible !important;
-                    background-color: #0a0a0a !important;
-                    color: #ffffff !important;
-                }
-                /* Dark mode styling for all Cusdis elements */
-                .cusdis-comment,
-                .cusdis-comment-content,
-                .cusdis-comment-body,
-                .cusdis-comment-header,
-                .cusdis-comment-author,
-                .cusdis-comment-time,
-                .cusdis-comment-text,
-                .cusdis-comment-form,
-                .cusdis-comment-input,
-                .cusdis-comment-textarea,
-                .cusdis-comment-button {
-                    background-color: #1a1a1a !important;
-                    color: #ffffff !important;
-                    border-color: #333333 !important;
-                }
-                input, textarea, button {
-                    background-color: #2a2a2a !important;
-                    color: #ffffff !important;
-                    border-color: #333333 !important;
-                }
-            `;
-            iframeDoc.head.appendChild(style);
-        } catch (e) {
-            console.log('Cannot access iframe content (cross-origin)');
-        }
-    }
-    
-    // Also try to style the iframe itself
     if (iframe) {
         iframe.style.height = 'auto';
         iframe.style.maxHeight = 'none';
@@ -91,10 +38,7 @@ function styleCusdis() {
 }
 
 // Try multiple times to catch the iframe when it loads
-setTimeout(styleCusdis, 1000);
-setTimeout(styleCusdis, 3000);
-setTimeout(styleCusdis, 5000);
-
-// Also try when the page loads
-document.addEventListener('DOMContentLoaded', styleCusdis);
+setTimeout(removeCusdisScrollbar, 1000);
+setTimeout(removeCusdisScrollbar, 3000);
+setTimeout(removeCusdisScrollbar, 5000);
 </script>
