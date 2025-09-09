@@ -1,13 +1,17 @@
 # Site settings
 title: "How About No"
 description: "A teenager's blog about art, stuff, and random thoughts"
-baseurl: ""
-url: ""
+baseurl: "/howaboutno"
+url: "https://how-about-no.github.io"
 
 # Build settings
 markdown: kramdown
 highlighter: rouge
 permalink: /:year/:month/:day/:title/
+
+assets:
+  sources:
+    - assets
 
 # Collections
 collections:
