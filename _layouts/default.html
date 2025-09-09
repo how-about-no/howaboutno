@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% if page.title %}{{ page.title }} - {% endif %}{{ site.title }}</title>
+    <meta name="description" content="{{ page.description | default: site.description }}">
+    <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-brand">
+                <a href="{{ '/' | relative_url }}">{{ site.title }}</a>
+            </div>
+            <div class="nav-links">
+                <a href="{{ '/' | relative_url }}" class="nav-link {% if page.url == '/' %}active{% endif %}">Home</a>
+                <a href="{{ '/art' | relative_url }}" class="nav-link {% if page.url == '/art/' %}active{% endif %}">Art</a>
+                <a href="{{ '/stuff' | relative_url }}" class="nav-link {% if page.url == '/stuff/' %}active{% endif %}">Stuff</a>
+                <a href="{{ '/comments' | relative_url }}" class="nav-link {% if page.url == '/comments/' %}active{% endif %}">Comments</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="main">
+        {{ content }}
+    </main>
+
+    <footer class="footer">
+        <p>&copy; {{ 'now' | date: "%Y" }} {{ site.title }}. Made with 💀 and caffeine.</p>
+    </footer>
+
+    <script src="{{ '/assets/js/main.js' | relative_url }}"></script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+---
+layout: default
+---
+
+<article class="post">
+    <header class="post-header">
+        <h1 class="post-title">{{ page.title }}</h1>
+        <div class="post-meta">
+            <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%B %d, %Y" }}</time>
+            {% if page.author %}
+                <span class="post-author">by {{ page.author }}</span>
+            {% endif %}
+        </div>
+    </header>
+
+    <div class="post-content">
+        {{ content }}
+    </div>
+
+    <footer class="post-footer">
+        <div class="post-tags">
+            {% if page.tags %}
+                {% for tag in page.tags %}
+                    <span class="tag">#{{ tag }}</span>
+                {% endfor %}
+            {% endif %}
+        </div>
+    </footer>
+</article>
+
+<div class="post-navigation">
+    {% if page.previous.url %}
+        <a href="{{ page.previous.url | relative_url }}" class="nav-link prev">← {{ page.previous.title }}</a>
+    {% endif %}
+    {% if page.next.url %}
+        <a href="{{ page.next.url | relative_url }}" class="nav-link next">{{ page.next.title }} →</a>
+    {% endif %}
+</div>
+
+<div id="cusdis_thread" data-host="https://cusdis.com" data-app-id="f774ef06-871e-4aea-91d6-12d6e4e0c4f8" data-page-id="{{ page.id }}" data-page-url="{{ page.url | absolute_url }}" data-page-title="{{ page.title }}"></div>
+<script async defer src="https://cusdis.com/js/cusdis.es.js"></script>
