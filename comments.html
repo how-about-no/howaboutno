@@ -14,31 +14,77 @@ title: Comments
         <p>I'd love to hear from you! Whether you want to discuss a blog post, share your own thoughts, or just want to say hello, this is the place to do it. Don't be shy - I promise I don't bite! 😊</p>
     </div>
 
-    <div id="cusdis_thread" 
-         data-host="https://cusdis.com" 
-         data-app-id="f774ef06-871e-4aea-91d6-12d6e4e0c4f8" 
-         data-page-id="comments" 
-         data-page-url="{{ site.url }}{{ site.baseurl }}/comments/" 
-         data-page-title="Comments & Feedback"
-         data-theme="dark">
+    <div class="comments-card">
+        <div id="cusdis_thread" 
+             data-host="https://cusdis.com" 
+             data-app-id="f774ef06-871e-4aea-91d6-12d6e4e0c4f8" 
+             data-page-id="comments" 
+             data-page-url="{{ site.url }}{{ site.baseurl }}/comments/" 
+             data-page-title="Comments & Feedback"
+             data-theme="dark">
+        </div>
     </div>
 </div>
 
 <script async defer src="https://cusdis.com/js/cusdis.es.js"></script>
 
 <script>
-// Simple script to remove height restrictions
-function removeCusdisScrollbar() {
-    const iframe = document.querySelector('iframe[src*="cusdis"]');
-    if (iframe) {
-        iframe.style.height = 'auto';
-        iframe.style.maxHeight = 'none';
-        iframe.style.overflow = 'visible';
-    }
-}
+// Inject CSS into the Cusdis iframe srcdoc to remove inner scrollbars and honor dark theme
+const observer = new MutationObserver((mutations) => {
+    for (const mutation of mutations) {
+        if (mutation.addedNodes.length === 0) continue;
+        const node = mutation.addedNodes[0];
+        if (!node || node.tagName !== 'IFRAME') continue;
 
-// Try multiple times to catch the iframe when it loads
-setTimeout(removeCusdisScrollbar, 1000);
-setTimeout(removeCusdisScrollbar, 3000);
-setTimeout(removeCusdisScrollbar, 5000);
+        try {
+            const extraCss = `
+              <style>
+                /* Remove inner scrollbars and expand content */
+                html, body, #root { height: auto !important; max-height: none !important; overflow: visible !important; }
+                * { scrollbar-width: none; }
+                *::-webkit-scrollbar { width: 0 !important; height: 0 !important; }
+                /* Dark base to match site */
+                :root { color-scheme: dark !important; }
+                body { background: #1a1a1a !important; color: #fff !important; }
+              </style>
+            `;
+            if (typeof node.srcdoc === 'string' && node.srcdoc.includes('</style>')) {
+                node.srcdoc = node.srcdoc.replace('</style>', extraCss + '</style>');
+            } else if (typeof node.srcdoc === 'string') {
+                node.srcdoc = node.srcdoc.replace('</head>', extraCss + '</head>');
+            }
+            // Also relax and enlarge iframe element constraints
+            node.style.height = 'auto';
+            node.style.maxHeight = 'none';
+            node.style.minHeight = '600px';
+            node.style.width = '100%';
+            node.style.overflow = 'visible';
+            node.setAttribute('scrolling', 'no');
+
+            // Try to auto-resize to content when accessible
+            const tryResize = () => {
+                try {
+                    const d = node.contentDocument || node.contentWindow.document;
+                    if (!d) return;
+                    const h = Math.max(
+                        d.body ? d.body.scrollHeight : 0,
+                        d.documentElement ? d.documentElement.scrollHeight : 0
+                    );
+                    if (h && h > 0) {
+                        node.style.height = h + 'px';
+                    }
+                } catch (_) {
+                    // Cross-origin; ignore
+                }
+            };
+            tryResize();
+            setTimeout(tryResize, 1200);
+            setTimeout(tryResize, 3000);
+            setInterval(tryResize, 5000);
+        } catch (e) {
+            console.log('Cusdis iframe style injection skipped:', e);
+        }
+    }
+});
+observer.observe(document.getElementById('cusdis_thread'), { childList: true, subtree: true });
 </script>

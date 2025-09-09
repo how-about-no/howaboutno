@@ -469,6 +469,15 @@ body {
     padding: 2rem;
 }
 
+/* Comments card to wrap Cusdis like the intro box */
+.comments-card {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 15px;
+    padding: 2rem;
+    margin-top: 1.5rem;
+}
+
 /* Post Layout */
 .post {
     max-width: 800px;
