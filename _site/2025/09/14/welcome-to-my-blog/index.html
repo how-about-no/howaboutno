@@ -1,30 +1,72 @@
----
-layout: default
-title: Comments
----
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hell Yeah - How About..</title>
+    <meta name="description" content="dump blog">
+    <link rel="stylesheet" href="/howaboutno/assets/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-brand">
+                <a href="/howaboutno/">How About..</a>
+            </div>
+            <div class="nav-links">
+                <a href="/howaboutno/" class="nav-link ">Home</a>
+                <a href="/howaboutno/art" class="nav-link ">Art</a>
+                <a href="/howaboutno/stuff" class="nav-link ">Stuff</a>
+                <a href="/howaboutno/comments" class="nav-link ">Comments</a>
+            </div>
+        </nav>
+    </header>
 
-<div class="page-header">
-    <h1 class="page-title">Comments</h1>
-    <p class="page-subtitle">anything anyone anything</p>
-</div>
-
-<div class="comments-section">
-    <div class="comments-intro">
-        <h2>Chat</h2>
-        <p>unfortunately, comments need to be approved before they show up.</p>
-    </div>
-
-    <div class="comments-card">
-        <div id="cusdis_thread" 
-             data-host="https://cusdis.com" 
-             data-app-id="f774ef06-871e-4aea-91d6-12d6e4e0c4f8" 
-             data-page-id="comments" 
-             data-page-url="{{ site.url }}{{ site.baseurl }}/comments/" 
-             data-page-title="Comments & Feedback"
-             data-theme="dark">
+    <main class="main">
+        <article class="post">
+    <header class="post-header">
+        <h1 class="post-title">Hell Yeah</h1>
+        <div class="post-meta">
+            <time datetime="2025-09-14T18:00:00+08:00">September 14, 2025</time>
+            
+                <span class="post-author">by N</span>
+            
         </div>
+    </header>
+
+    <div class="post-content">
+        <p>completely drained, but somehow still managed to pull it off</p>
+
+<p><a href="/comments">comments</a></p>
+
     </div>
+
+    <footer class="post-footer">
+        <div class="post-tags">
+            
+                
+                    <span class="tag">#fuck</span>
+                
+                    <span class="tag">#yeah</span>
+                
+                    <span class="tag">#blog</span>
+                
+            
+        </div>
+    </footer>
+</article>
+
+<div class="post-navigation">
+    
+    
 </div>
+
+
+    <div class="post">
+        <div id="cusdis_thread" data-host="https://cusdis.com" data-app-id="f774ef06-871e-4aea-91d6-12d6e4e0c4f8" data-page-id="/2025/09/14/welcome-to-my-blog" data-page-url="http://localhost:4000/howaboutno/2025/09/14/welcome-to-my-blog/" data-page-title="Hell Yeah" data-theme="dark"></div>
+    </div>
+
 
 <script async defer src="https://cusdis.com/js/cusdis.es.js"></script>
 
@@ -38,7 +80,7 @@ const observer = new MutationObserver((mutations) => {
 
         try {
             const extraCss = `
-              <style>
+                <style>
                 /* Remove inner scrollbars and expand content */
                 html, body, #root { height: auto !important; max-height: none !important; overflow: visible !important; }
                 * { scrollbar-width: none; }
@@ -46,7 +88,7 @@ const observer = new MutationObserver((mutations) => {
                 /* Dark base to match site */
                 :root { color-scheme: dark !important; }
                 body { background: #1a1a1a !important; color: #fff !important; }
-              </style>
+                </style>
             `;
             if (typeof node.srcdoc === 'string' && node.srcdoc.includes('</style>')) {
                 node.srcdoc = node.srcdoc.replace('</style>', extraCss + '</style>');
@@ -70,7 +112,7 @@ const observer = new MutationObserver((mutations) => {
             const listHeight = getListHeight();
             node.style.height = 'auto';
             node.style.maxHeight = 'none';
-            node.style.minHeight = (600 + listHeight) + 'px';
+            node.style.minHeight = (370 + listHeight) + 'px';
             node.style.width = '100%';
             node.style.overflow = 'visible';
             node.setAttribute('scrolling', 'no');
@@ -94,4 +136,12 @@ const observer = new MutationObserver((mutations) => {
 });
 observer.observe(document.getElementById('cusdis_thread'), { childList: true, subtree: true });
 </script>
+    </main>
 
+    <footer class="footer">
+        <p>&copy; 2025 How About...</p>
+    </footer>
+
+    <script src="/howaboutno/assets/js/main.js"></script>
+</body>
+</html>
