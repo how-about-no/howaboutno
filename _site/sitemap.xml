@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
-<loc>http://localhost:4000/2024/01/15/welcome-to-my-blog/</loc>
+<loc>http://localhost:4000/howaboutno/2024/01/15/welcome-to-my-blog/</loc>
 <lastmod>2024-01-15T18:00:00+08:00</lastmod>
 </url>
 <url>
-<loc>http://localhost:4000/2024/01/20/teenage-thoughts/</loc>
+<loc>http://localhost:4000/howaboutno/2024/01/20/teenage-thoughts/</loc>
 <lastmod>2024-01-20T22:30:00+08:00</lastmod>
 </url>
 <url>
-<loc>http://localhost:4000/art/</loc>
+<loc>http://localhost:4000/howaboutno/art/</loc>
 </url>
 <url>
-<loc>http://localhost:4000/comments/</loc>
+<loc>http://localhost:4000/howaboutno/comments/</loc>
 </url>
 <url>
-<loc>http://localhost:4000/</loc>
+<loc>http://localhost:4000/howaboutno/</loc>
 </url>
 <url>
-<loc>http://localhost:4000/stuff/</loc>
+<loc>http://localhost:4000/howaboutno/stuff/</loc>
 </url>
 </urlset>
