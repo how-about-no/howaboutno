@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Hell Yeah"
+title: "HELL YEAH"
 date: 2025-09-14 10:00:00 -0000
 author: "N"
 tags: [fuck, yeah, blog]

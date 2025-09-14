@@ -11,7 +11,7 @@ title: Comments
 <div class="comments-section">
     <div class="comments-intro">
         <h2>Chat</h2>
-        <p>unfortunately, comments need to be approved before they show up.</p>
+        <p>unfortunately, comments need to be approved before they show up</p>
     </div>
 
     <div class="comments-card">
@@ -76,7 +76,7 @@ const observer = new MutationObserver((mutations) => {
             const listHeight = getListHeight();
             node.style.height = 'auto';
             node.style.maxHeight = 'none';
-            node.style.minHeight = (600 + listHeight) + 'px';
+            node.style.minHeight = (310 + listHeight) + 'px';
             node.style.width = '100%';
             node.style.overflow = 'visible';
             node.setAttribute('scrolling', 'no');
@@ -85,7 +85,7 @@ const observer = new MutationObserver((mutations) => {
             const tryResize = () => {
                 const newListHeight = getListHeight();
                 if (newListHeight > 0) {
-                    node.style.minHeight = (370 + newListHeight) + 'px';
+                    node.style.minHeight = (310 + newListHeight) + 'px';
                 }
             };
             

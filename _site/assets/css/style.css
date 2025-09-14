@@ -30,6 +30,22 @@ body {
     flex-direction: column;
 }
 
+/* General Link Styles */
+a {
+    color: var(--accent-secondary);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: var(--accent-primary);
+    text-decoration: underline;
+}
+
+a:visited {
+    color: var(--accent-tertiary);
+}
+
 /* Header and Navigation */
 .header {
     background: var(--bg-secondary);

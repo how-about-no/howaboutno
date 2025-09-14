@@ -93,7 +93,7 @@ const observer = new MutationObserver((mutations) => {
             const listHeight = getListHeight();
             node.style.height = 'auto';
             node.style.maxHeight = 'none';
-            node.style.minHeight = (370 + listHeight) + 'px';
+            node.style.minHeight = (320 + listHeight) + 'px';
             node.style.width = '100%';
             node.style.overflow = 'visible';
             node.setAttribute('scrolling', 'no');
@@ -102,7 +102,7 @@ const observer = new MutationObserver((mutations) => {
             const tryResize = () => {
                 const newListHeight = getListHeight();
                 if (newListHeight > 0) {
-                    node.style.minHeight = (370 + newListHeight) + 'px';
+                    node.style.minHeight = (320 + newListHeight) + 'px';
                 }
             };
             
