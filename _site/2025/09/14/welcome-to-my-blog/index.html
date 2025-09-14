@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hell Yeah - How About..</title>
+    <title>Hell Yeah - How About No</title>
     <meta name="description" content="dump blog">
     <link rel="stylesheet" href="/howaboutno/assets/css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -92,6 +92,12 @@ const observer = new MutationObserver((mutations) => {
                 /* Dark base to match site */
                 :root { color-scheme: dark !important; }
                 body { background: #1a1a1a !important; color: #fff !important; }
+                /* Hide Cusdis branding */
+                .text-center.text-gray-500.dark\\:text-gray-100.text-xs,
+                .text-center.text-gray-500,
+                a[href="https://cusdis.com"] {
+                  display: none !important;
+                }
                 </style>
             `;
             if (typeof node.srcdoc === 'string' && node.srcdoc.includes('</style>')) {
@@ -143,7 +149,7 @@ observer.observe(document.getElementById('cusdis_thread'), { childList: true, su
     </main>
 
     <footer class="footer">
-        <p>&copy; 2025 How About...</p>
+        <p>&copy; 2025 How About No.</p>
     </footer>
 
     <script src="/howaboutno/assets/js/main.js"></script>
