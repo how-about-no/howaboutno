@@ -37,9 +37,25 @@ a {
     transition: color 0.3s ease;
 }
 
+/* General link hover - but exclude navigation and special links */
 a:hover {
-    color: var(--accent-primary);
+    color: var(--accent-primary) !important;
     text-decoration: underline;
+}
+
+/* Override for navigation links */
+.nav-link:hover {
+    text-decoration: none !important;
+}
+
+/* Override for post card title links */
+.post-card-title a:hover {
+    text-decoration: none !important;
+}
+
+/* Override for read more links */
+.read-more:hover {
+    text-decoration: none !important;
 }
 
 a:visited {
@@ -82,7 +98,7 @@ a:visited {
 }
 
 .nav-link {
-    color: var(--text-secondary);
+    color: var(--text-muted) !important;
     text-decoration: none;
     font-weight: 500;
     transition: all 0.3s ease;
@@ -92,7 +108,8 @@ a:visited {
 
 .nav-link:hover,
 .nav-link.active {
-    color: var(--accent-primary);
+    color: var(--accent-primary) !important;
+    text-decoration: none !important;
 }
 
 .nav-link::after {
