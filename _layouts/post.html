@@ -46,74 +46,72 @@ layout: default
 <script async defer src="https://cusdis.com/js/cusdis.es.js"></script>
 
 <script>
-// Inject CSS into the Cusdis iframe srcdoc to remove inner scrollbars and honor dark theme
-const observer = new MutationObserver((mutations) => {
-    for (const mutation of mutations) {
-        if (mutation.addedNodes.length === 0) continue;
-        const node = mutation.addedNodes[0];
-        if (!node || node.tagName !== 'IFRAME') continue;
-
-        try {
-            const extraCss = `
-                <style>
-                /* Remove inner scrollbars and expand content */
-                html, body, #root { height: auto !important; max-height: none !important; overflow: visible !important; }
-                * { scrollbar-width: none; }
-                *::-webkit-scrollbar { width: 0 !important; height: 0 !important; }
-                /* Dark base to match site */
-                :root { color-scheme: dark !important; }
-                body { background: #1a1a1a !important; color: #fff !important; }
-                /* Hide Cusdis branding */
-                .text-center.text-gray-500.dark\\:text-gray-100.text-xs,
-                .text-center.text-gray-500,
-                a[href="https://cusdis.com"] {
-                  display: none !important;
+    // Inject CSS into the Cusdis iframe srcdoc to remove inner scrollbars and honor dark theme
+    const observer = new MutationObserver((mutations) => {
+        for (const mutation of mutations) {
+            if (mutation.addedNodes.length === 0) continue;
+            const node = mutation.addedNodes[0];
+            if (!node || node.tagName !== 'IFRAME') continue;
+    
+            try {
+                const extraCss = `
+                  <style>
+                    /* Remove inner scrollbars and expand content */
+                    html, body, #root { height: auto !important; max-height: none !important; overflow: visible !important; }
+                    * { scrollbar-width: none; }
+                    *::-webkit-scrollbar { width: 0 !important; height: 0 !important; }
+                    /* Dark base to match site */
+                    :root { color-scheme: dark !important; }
+                    body { background: #1a1a1a !important; color: #fff !important; }
+                    /* Hide Cusdis branding */
+                    a[href="https://cusdis.com"] {
+                      display: none !important;
+                    }
+                  </style>
+                `;
+                if (typeof node.srcdoc === 'string' && node.srcdoc.includes('</style>')) {
+                    node.srcdoc = node.srcdoc.replace('</style>', extraCss + '</style>');
+                } else if (typeof node.srcdoc === 'string') {
+                    node.srcdoc = node.srcdoc.replace('</head>', extraCss + '</head>');
                 }
-                </style>
-            `;
-            if (typeof node.srcdoc === 'string' && node.srcdoc.includes('</style>')) {
-                node.srcdoc = node.srcdoc.replace('</style>', extraCss + '</style>');
-            } else if (typeof node.srcdoc === 'string') {
-                node.srcdoc = node.srcdoc.replace('</head>', extraCss + '</head>');
+                // Also relax and enlarge iframe element constraints
+                // Get height of .mt-4.px-1 and add to minHeight
+                const getListHeight = () => {
+                    try {
+                        const d = node.contentDocument || node.contentWindow.document;
+                        if (!d) return 0;
+                        const list = d.querySelector('.mt-4.px-1');
+                        if (!list) return 0;
+                        return list.offsetHeight || list.scrollHeight || 0;
+                    } catch (_) {
+                        return 0;
+                    }
+                };
+    
+                const listHeight = getListHeight();
+                node.style.height = 'auto';
+                node.style.maxHeight = 'none';
+                node.style.minHeight = (310 + listHeight) + 'px';
+                node.style.width = '100%';
+                node.style.overflow = 'visible';
+                node.setAttribute('scrolling', 'no');
+    
+                // Try to auto-resize to content when accessible
+                const tryResize = () => {
+                    const newListHeight = getListHeight();
+                    if (newListHeight > 0) {
+                        node.style.minHeight = (310 + newListHeight) + 'px';
+                    }
+                };
+                
+                tryResize();
+                setTimeout(tryResize, 1200);
+                setTimeout(tryResize, 3000);
+                setInterval(tryResize, 5000);
+            } catch (e) {
+                console.log('Cusdis iframe style injection skipped:', e);
             }
-            // Also relax and enlarge iframe element constraints
-            // Get height of .mt-4.px-1 and add to minHeight
-            const getListHeight = () => {
-                try {
-                    const d = node.contentDocument || node.contentWindow.document;
-                    if (!d) return 0;
-                    const list = d.querySelector('.mt-4.px-1');
-                    if (!list) return 0;
-                    return list.offsetHeight || list.scrollHeight || 0;
-                } catch (_) {
-                    return 0;
-                }
-            };
-
-            const listHeight = getListHeight();
-            node.style.height = 'auto';
-            node.style.maxHeight = 'none';
-            node.style.minHeight = (320 + listHeight) + 'px';
-            node.style.width = '100%';
-            node.style.overflow = 'visible';
-            node.setAttribute('scrolling', 'no');
-
-            // Try to auto-resize to content when accessible
-            const tryResize = () => {
-                const newListHeight = getListHeight();
-                if (newListHeight > 0) {
-                    node.style.minHeight = (320 + newListHeight) + 'px';
-                }
-            };
-            
-            tryResize();
-            setTimeout(tryResize, 1200);
-            setTimeout(tryResize, 3000);
-            setInterval(tryResize, 5000);
-        } catch (e) {
-            console.log('Cusdis iframe style injection skipped:', e);
         }
-    }
-});
-observer.observe(document.getElementById('cusdis_thread'), { childList: true, subtree: true });
-</script>
+    });
+    observer.observe(document.getElementById('cusdis_thread'), { childList: true, subtree: true });
+    </script>
