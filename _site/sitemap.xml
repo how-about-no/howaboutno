@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
-<loc>http://localhost:4000/howaboutno/2025/09/14/welcome-to-my-blog/</loc>
+<loc>https://how-about-no.github.io/howaboutno/2025/09/14/welcome-to-my-blog/</loc>
 <lastmod>2025-09-14T18:00:00+08:00</lastmod>
 </url>
 <url>
-<loc>http://localhost:4000/howaboutno/art/</loc>
+<loc>https://how-about-no.github.io/howaboutno/art/</loc>
 </url>
 <url>
-<loc>http://localhost:4000/howaboutno/comments/</loc>
+<loc>https://how-about-no.github.io/howaboutno/comments/</loc>
 </url>
 <url>
-<loc>http://localhost:4000/howaboutno/</loc>
+<loc>https://how-about-no.github.io/howaboutno/</loc>
 </url>
 <url>
-<loc>http://localhost:4000/howaboutno/stuff/</loc>
+<loc>https://how-about-no.github.io/howaboutno/stuff/</loc>
 </url>
 </urlset>

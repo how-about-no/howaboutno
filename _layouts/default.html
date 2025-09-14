@@ -12,7 +12,17 @@
     <header class="header">
         <nav class="nav">
             <div class="nav-brand">
-                <a href="{{ '/' | relative_url }}">{{ site.title }}</a>
+                <a href="{{ '/' | relative_url }}">
+                    {% if page.url == '/art/' %}
+                        How About Art
+                    {% elsif page.url == '/stuff/' %}
+                        How About Stuff
+                    {% elsif page.url == '/comments/' %}
+                        How About Comments
+                    {% else %}
+                        {{ site.title }}
+                    {% endif %}
+                </a>
             </div>
             <div class="nav-links">
                 <a href="{{ '/' | relative_url }}" class="nav-link {% if page.url == '/' %}active{% endif %}">Home</a>

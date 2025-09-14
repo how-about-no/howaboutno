@@ -1,1 +1,1 @@
-Sitemap: http://localhost:4000/howaboutno/sitemap.xml
+Sitemap: https://how-about-no.github.io/howaboutno/sitemap.xml
